@@ -1,0 +1,22 @@
+# Tasks: Grins2Go Revamp
+
+- [x] Initialize Git repository
+- [x] Install Cloudflare adapter (`@astrojs/cloudflare`)
+- [x] Scaffold directory structure (`src/components`, `src/styles`, etc.)
+- [ ] Establish "Coastal Premium" Design System
+    - [ ] Create `global.css` with HSL tokens
+    - [ ] Set up Typography (Outfit + Serif)
+- [ ] Core Component Library
+    - [ ] `Navbar.astro` (Glassmorphism)
+    - [ ] `Footer.astro`
+    - [ ] `Hero.astro`
+    - [ ] `PhotoGrid.astro`
+- [ ] Page Migration (from beachportraitsmaui.com)
+    - [ ] Home Page layout
+    - [ ] Gallery Pages (Family, Sunset, etc.)
+    - [ ] Pricing Page
+    - [ ] Reviews/Testimonials
+- [ ] Deployment & Sync
+    - [ ] Connect to GitHub/GitLab remote
+    - [ ] Configure Cloudflare Pages deployment
+    - [ ] Final performance & SEO audit

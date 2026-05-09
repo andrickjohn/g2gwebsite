@@ -1,14 +1,26 @@
 # Grins2Go Website | Coastal Premium Revamp
 
 > [!IMPORTANT]
-> **🚢 MESSAGE IN A BOTTLE: CONTINUING ON YOUR OTHER COMPUTER**
-> 1. Open your terminal on the other machine.
-> 2. `cd` into your project directory.
-> 3. Run `git pull origin main` to get the latest Tailwind 4.0 setup and Hero section.
-> 4. Run `npm install` to ensure the new Tailwind dependencies are ready.
-> 5. Run `npm run dev` to pick up exactly where we left off.
+> **🚢 MESSAGE IN A BOTTLE — Last updated: 2026-05-09**
+>
+> **Status**: Foundation complete (Astro + Tailwind 4 + Cloudflare). Full migration plan written. **Blocked on 5 owner inputs** before building can continue.
+>
+> **To continue on another computer:**
+> 1. `git pull origin main`
+> 2. `npm install`
+> 3. `npm run dev`
+> 4. Read `PROGRESS.md` for full status
+> 5. Read `PLAN.md` for the complete migration strategy
+>
+> **🔴 OWNER INPUT NEEDED (answer these to unblock the build):**
+> 1. **Photos** — Where are your portfolio images? (local folder, Drive, Dropbox?)
+> 2. **Reviews** — Export full review text from WordPress admin (Tools → Export → Testimonials). 250+ reviews need the body text, not just titles.
+> 3. **Pricing** — Is the current site pricing still accurate?
+> 4. **Domain** — Will this replace beachportraitsmaui.com?
+> 5. **Booking** — Keep phone/email only, or add an online booking form?
 
 ---
+
 
 This project is a high-performance revamp of [beachportraitsmaui.com](https://www.beachportraitsmaui.com/), moving from WordPress to **Astro + Cloudflare (SSR)**.
 

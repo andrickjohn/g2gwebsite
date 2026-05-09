@@ -7,106 +7,44 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
 	<main>
 		<!-- Hero Section -->
-		<section class="hero section-padding">
-			<div class="container">
-				<div class="hero-content" data-reveal="visible">
-					<span class="text-gold italic serif">Maui Portrait Photography</span>
-					<h1>Family Memories That <br /><span class="italic">Last a Lifetime</span></h1>
-					<p>Capturing the warmth of the sun and the joy of your family in the most beautiful beaches of Maui.</p>
-					<div class="hero-actions">
-						<a href="#gallery" class="btn btn-primary">View Galleries</a>
-						<a href="#booking" class="btn btn-secondary">Book a Session</a>
+		<section class="min-h-[80vh] flex items-center bg-[linear-gradient(rgba(13,47,47,0.4),rgba(13,47,47,0.4)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2073')] bg-center bg-cover bg-no-repeat text-white">
+			<div class="container-custom">
+				<div class="reveal reveal-visible max-w-3xl">
+					<span class="text-gold-500 italic font-serif text-lg tracking-wide">Maui Portrait Photography</span>
+					<h1 class="text-white text-[clamp(2.5rem,8vw,4.5rem)] leading-tight my-fluid-s">
+						Family Memories That <br /><span class="italic">Last a Lifetime</span>
+					</h1>
+					<p class="max-w-[50ch] text-fluid-s mb-fluid-m opacity-90">
+						Capturing the warmth of the sun and the joy of your family in the most beautiful beaches of Maui.
+					</p>
+					<div class="flex flex-wrap gap-fluid-s">
+						<a href="#gallery" class="px-fluid-m py-fluid-s bg-gold-500 text-teal-900 rounded-lg font-medium uppercase tracking-[0.1em] text-xs transition-all hover:bg-gold-600">
+							View Galleries
+						</a>
+						<a href="#booking" class="px-fluid-m py-fluid-s border border-white/50 text-white rounded-lg font-medium uppercase tracking-[0.1em] text-xs backdrop-blur-md transition-all hover:bg-white/10">
+							Book a Session
+						</a>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Trust / Stats Bar -->
-		<section class="stats">
-			<div class="container grid-stats">
-				<div class="stat-item">
-					<span class="stat-number">15+</span>
-					<span class="stat-label">Years in Maui</span>
+		<section class="bg-sand-50">
+			<div class="container-custom grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-fluid-l py-fluid-l text-center border-b border-teal-900/10">
+				<div class="flex flex-col gap-1">
+					<span class="font-serif text-5xl text-gold-500">15+</span>
+					<span class="uppercase tracking-[0.2em] text-[0.7rem] text-teal-900/60 font-medium">Years in Maui</span>
 				</div>
-				<div class="stat-item">
-					<span class="stat-number">2k+</span>
-					<span class="stat-label">Happy Families</span>
+				<div class="flex flex-col gap-1">
+					<span class="font-serif text-5xl text-gold-500">2k+</span>
+					<span class="uppercase tracking-[0.2em] text-[0.7rem] text-teal-900/60 font-medium">Happy Families</span>
 				</div>
-				<div class="stat-item">
-					<span class="stat-number">5.0</span>
-					<span class="stat-label">Rating</span>
+				<div class="flex flex-col gap-1">
+					<span class="font-serif text-5xl text-gold-500">5.0</span>
+					<span class="uppercase tracking-[0.2em] text-[0.7rem] text-teal-900/60 font-medium">Rating</span>
 				</div>
 			</div>
 		</section>
 	</main>
 </Layout>
-
-<style>
-	.hero {
-		min-height: 80vh;
-		display: flex;
-		align-items: center;
-		background: linear-gradient(rgba(13, 47, 47, 0.2), rgba(13, 47, 47, 0.2)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2073') center/cover no-repeat;
-		color: white;
-	}
-
-	.hero-content h1 {
-		font-size: clamp(2.5rem, 8vw, 4.5rem);
-		color: white;
-		margin-block: var(--space-s);
-	}
-
-	.hero-content p {
-		max-width: 50ch;
-		font-size: var(--space-s);
-		margin-bottom: var(--space-m);
-	}
-
-	.hero-actions {
-		display: flex;
-		gap: var(--space-s);
-	}
-
-	.btn {
-		padding: var(--space-s) var(--space-m);
-		border-radius: var(--radius-m);
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		font-size: 0.8rem;
-	}
-
-	.btn-primary {
-		background: var(--accent);
-		color: var(--color-teal-900);
-	}
-
-	.btn-secondary {
-		border: 1px solid white;
-		color: white;
-		backdrop-filter: blur(10px);
-	}
-
-	.grid-stats {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: var(--space-l);
-		padding-block: var(--space-l);
-		text-align: center;
-		border-bottom: 1px solid hsla(var(--color-teal-900), 0.1);
-	}
-
-	.stat-number {
-		display: block;
-		font-family: var(--font-serif);
-		font-size: 3rem;
-		color: var(--accent);
-	}
-
-	.stat-label {
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		font-size: 0.7rem;
-		color: var(--text-muted);
-	}
-</style>

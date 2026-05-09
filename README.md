@@ -1,5 +1,15 @@
 # Grins2Go Website | Coastal Premium Revamp
 
+> [!IMPORTANT]
+> **🚢 MESSAGE IN A BOTTLE: CONTINUING ON YOUR OTHER COMPUTER**
+> 1. Open your terminal on the other machine.
+> 2. `cd` into your project directory.
+> 3. Run `git pull origin main` to get the latest Tailwind 4.0 setup and Hero section.
+> 4. Run `npm install` to ensure the new Tailwind dependencies are ready.
+> 5. Run `npm run dev` to pick up exactly where we left off.
+
+---
+
 This project is a high-performance revamp of [beachportraitsmaui.com](https://www.beachportraitsmaui.com/), moving from WordPress to **Astro + Cloudflare (SSR)**.
 
 ## 🌅 The "Coastal Premium" Design System

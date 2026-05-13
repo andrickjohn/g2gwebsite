@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Pricing | Beach Portraits Maui"
+  description="Beach portrait pricing in Maui. Groups of 7 or less: $99 session fee, collections from $299. Groups 8+: $175 session fee, collections from $899. Call (808) 242-1424."
+>
+  <Navbar />
+
+  <!-- Hero -->
+  <section class="relative pt-36 pb-20 bg-charcoal-950 text-white text-center">
+    <div class="absolute inset-0 opacity-30">
+      <img src="/uploads/2017/09/Maui-Beach-Portraits-Morning-002-06-L.jpg" alt="" class="w-full h-full object-cover" style="object-position: center 25%;" loading="eager" aria-hidden="true" />
+    </div>
+    <div class="relative z-10 container-custom reveal">
+      <p class="text-eyebrow mb-4">Simple & Transparent</p>
+      <h1 class="text-headline text-white mb-4">Pricing</h1>
+      <span class="accent-line-center mb-6"></span>
+      <p class="text-body-lg text-white/55 max-w-[44ch] mx-auto">
+        No hidden fees. No complicated packages. Just great portraits at a fair price.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Tiers -->
+  <section class="section-pad bg-ivory-50">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+        <!-- Tier 1 -->
+        <article class="reveal flex flex-col border border-charcoal-900/10 bg-white hover:border-gold-500/40 hover:shadow-xl transition-all duration-400">
+          <div class="bg-charcoal-900 text-white p-8 text-center">
+            <p class="text-eyebrow mb-3">Families & Couples</p>
+            <h2 class="font-serif text-3xl text-white font-light mb-2">Up to 7 People</h2>
+            <div class="flex items-baseline justify-center gap-2 mt-4">
+              <span class="font-serif text-5xl text-white leading-none">$99</span>
+              <span class="text-white/45 text-caption">session fee</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-1 p-8 gap-6">
+            <div class="flex items-start gap-3 pb-4 border-b border-charcoal-900/8">
+              <div class="w-6 h-6 rounded-full bg-gold-500/15 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="text-gold-600" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p class="font-sans font-medium text-charcoal-900 text-sm">Image Collections start at</p>
+                <p class="font-serif text-2xl mt-0.5" style="color: var(--color-gold-600);">$299</p>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              {[
+                'Private beach session at your preferred location',
+                'Morning or sunset timing available',
+                'Professional lighting & direction',
+                'Online gallery delivery',
+                'Multiple print & digital options',
+                'Individuals, couples, families, anniversaries',
+              ].map(item => (
+                <div class="flex items-start gap-3">
+                  <div class="w-5 h-5 rounded-full bg-charcoal-900/6 flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="text-charcoal-700" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <p class="text-caption text-charcoal-600/70">{item}</p>
+                </div>
+              ))}
+            </div>
+            <div class="mt-auto pt-4">
+              <a href="tel:+18082421424" class="btn-gold w-full justify-center">Book This Session</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tier 2 -->
+        <article class="reveal flex flex-col border-2 border-gold-500 bg-white shadow-2xl relative" style="animation-delay: 0.1s;">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gold-500 text-charcoal-950 text-caption uppercase tracking-[0.2em] px-4 py-1 font-medium whitespace-nowrap">
+            Our Specialty
+          </div>
+          <div class="bg-charcoal-950 text-white p-8 text-center">
+            <p class="text-eyebrow mb-3">Groups & Reunions</p>
+            <h2 class="font-serif text-3xl text-white font-light mb-2">8+ People</h2>
+            <div class="flex items-baseline justify-center gap-2 mt-4">
+              <span class="font-serif text-5xl text-white leading-none">$175</span>
+              <span class="text-white/45 text-caption">session fee</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-1 p-8 gap-6">
+            <div class="flex items-start gap-3 pb-4 border-b border-charcoal-900/8">
+              <div class="w-6 h-6 rounded-full bg-gold-500/15 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="text-gold-600" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p class="font-sans font-medium text-charcoal-900 text-sm">Image Collections start at</p>
+                <p class="font-serif text-2xl mt-0.5" style="color: var(--color-gold-600);">$899</p>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              {[
+                'Everything in the Families & Couples tier',
+                'Extended session time for large groups',
+                'Expert multi-generational group arranging',
+                '13+ people? Add $25 per additional person',
+                "We've photographed groups of 40+ on Maui's beaches",
+                'Family reunions, corporate retreats, celebrations',
+              ].map(item => (
+                <div class="flex items-start gap-3">
+                  <div class="w-5 h-5 rounded-full bg-gold-500/12 flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="text-gold-600" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <p class="text-caption text-charcoal-600/70">{item}</p>
+                </div>
+              ))}
+            </div>
+            <div class="mt-auto pt-4">
+              <a href="tel:+18082421424" class="btn-gold w-full justify-center">Book This Session</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Additional info -->
+      <div class="max-w-4xl mx-auto mt-6 reveal">
+        <div class="bg-ivory-100 border border-charcoal-900/8 p-6 text-center">
+          <p class="text-caption text-charcoal-600 leading-relaxed">
+            <strong class="text-charcoal-900 font-medium">Large groups (13+):</strong> Start with the 8+ pricing, then add $25 per additional person.
+            <strong class="text-charcoal-900 font-medium">Weddings & engagements:</strong> Call us for custom pricing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Morning vs Sunset note -->
+      <div class="max-w-4xl mx-auto mt-4 reveal">
+        <div class="bg-charcoal-900 text-white p-6 flex flex-col sm:flex-row gap-6 items-center">
+          <div class="flex-1">
+            <p class="text-eyebrow mb-2">Morning vs. Sunset</p>
+            <p class="text-caption text-white/55 leading-relaxed">
+              We focus on morning sessions (starting ~7:30 AM) — the light is stunning, beaches are calm, and we can schedule multiple sessions. Sunset sessions are premium, limited to one per evening, and priced accordingly. Call for sunset availability and pricing.
+            </p>
+          </div>
+          <a href="tel:+18082421424" class="btn-gold whitespace-nowrap">Call for Details</a>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="max-w-3xl mx-auto mt-16">
+        <h2 class="text-title text-center mb-8 reveal">Common Questions</h2>
+        <div class="flex flex-col gap-3">
+          {[
+            {
+              q: "What does the session fee include?",
+              a: "The session fee covers your photographer's time, expertise, travel to the location, and the full session. Image collections (prints, digital files, albums) are priced separately starting at the amounts listed."
+            },
+            {
+              q: "When do you shoot?",
+              a: "We specialize in morning sessions — starting around 7:30 AM, with the last morning session around 11 AM depending on time of year. Morning light on Maui is extraordinary: warm, colorful, and soft. Sunset sessions are also available as a premium option, limited to one per evening."
+            },
+            {
+              q: "Which beaches do you work at?",
+              a: "We know and use all the best beaches on Maui. Our home base is the Hyatt Regency Maui Resort & Spa in Ka'anapali — excellent grounds, notably beyond what most resorts offer. We also shoot at Wailea, Kapalua, Makena, and more."
+            },
+            {
+              q: "Do you do weddings and engagements?",
+              a: "Yes. We photograph weddings, engagements, honeymoons, vow renewals, and proposal captures on the beach. Call us to discuss your event and we'll put together a custom package."
+            },
+            {
+              q: "How do I book?",
+              a: "Call us at (808) 242-1424. We want to talk to you directly — hear about your family, your timeline, and what matters most to you. No online forms. No bots."
+            },
+          ].map(({ q, a }) => (
+            <details class="reveal border border-charcoal-900/8 bg-white group">
+              <summary class="flex justify-between items-center p-5 cursor-pointer list-none font-serif text-charcoal-900 hover:text-gold-600 transition-colors">
+                <span class="text-lg">{q}</span>
+                <svg class="text-gold-500 transition-transform duration-300 group-open:rotate-45 shrink-0 ml-4" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              </summary>
+              <p class="px-5 pb-5 text-caption text-charcoal-600/65 leading-relaxed">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-charcoal-900 text-white section-pad-sm">
+    <div class="container-custom text-center flex flex-col items-center gap-5 reveal">
+      <h2 class="text-title text-white">Ready to Reserve Your Session?</h2>
+      <p class="text-body text-white/50 max-w-[38ch]">Give us a call — we'll answer every question about locations, timing, and what to wear.</p>
+      <a href="tel:+18082421424" class="btn-gold mt-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (808) 242-1424
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

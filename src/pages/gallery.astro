@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import galleryData from '../data/gallery.json';
+---
+
+<Layout
+  title="Gallery | Beach Portraits Maui"
+  description="Browse our portfolio of Maui beach portraits — families, couples, groups, morning sessions, sunset sessions, Wailea, and Hyatt Regency. 20,000+ sessions by Grins2Go Photography."
+>
+  <Navbar />
+
+  <section class="relative pt-36 pb-20 bg-charcoal-950 text-white text-center overflow-hidden">
+    <div class="absolute inset-0 opacity-30">
+      <img src="/uploads/2017/09/Maui-Beach-Portraits-Morning-008-06-L.jpg" alt="" class="w-full h-full object-cover" style="object-position: center 25%;" loading="eager" aria-hidden="true" />
+    </div>
+    <div class="relative z-10 container-custom reveal">
+      <p class="text-eyebrow mb-4">The Portfolio</p>
+      <h1 class="text-headline text-white mb-4">Our Gallery</h1>
+      <span class="accent-line-center mb-6"></span>
+      <p class="text-body-lg text-white/55 max-w-[46ch] mx-auto">
+        A selection from 20 years and 20,000+ sessions. Use the filters to explore by session type.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad bg-ivory-50">
+    <div class="container-wide">
+      <PhotoGrid images={galleryData} />
+    </div>
+  </section>
+
+  <section class="bg-charcoal-900 text-white py-20">
+    <div class="container-custom text-center flex flex-col items-center gap-6 reveal">
+      <p class="text-eyebrow" style="color: var(--color-gold-400);">Ready for Yours?</p>
+      <h2 class="text-title text-white">Book Your Maui Beach Session</h2>
+      <p class="text-body text-white/50 max-w-[40ch]">Sessions start at $99. Call us and we'll find the perfect time.</p>
+      <a href="tel:+18082421424" class="btn-gold">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (808) 242-1424
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

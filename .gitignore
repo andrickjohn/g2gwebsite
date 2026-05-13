@@ -19,6 +19,22 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+~$*
 
 # jetbrains setting folder
 .idea/
+
+# WordPress uploads (too large for git — deploy via FTP)
+uploads/
+public/uploads/
+
+# Source logo files (large PNGs/PSDs)
+Logos/
+
+# WordPress exports (large XML)
+export*.xml
+
+# Wrangler local state
+.wrangler/
+Repeat Clients/
+*.docx

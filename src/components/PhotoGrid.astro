@@ -1,0 +1,181 @@
+---
+/**
+ * PhotoGrid — CSS grid with category filtering and native dialog lightbox
+ * Ends cleanly: last row centers orphans
+ */
+interface Props {
+  images: Array<{ src: string; category: string; filename: string }>;
+  limit?: number;
+}
+
+const { images, limit } = Astro.props;
+const displayImages = limit ? images.slice(0, limit) : images;
+
+// Build category list
+const categories = [...new Set(images.map(i => i.category))].sort();
+---
+
+<!-- Filter Tabs -->
+{!limit && (
+  <div class="flex flex-wrap justify-center gap-3 mb-10 reveal" id="gallery-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    {categories.map(cat => (
+      <button class="filter-btn" data-filter={cat}>{cat}</button>
+    ))}
+  </div>
+)}
+
+<!-- Grid -->
+<div class="photo-grid" id="photo-grid">
+  {displayImages.map((image, i) => (
+    <div
+      class="grid-item reveal"
+      data-category={image.category}
+      style={`transition-delay: ${Math.min(i * 60, 400)}ms`}
+    >
+      <button class="photo-trigger photo-hover block w-full cursor-pointer bg-transparent border-none p-0" data-src={image.src} data-index={i} aria-label="Open photo">
+        <img
+          src={image.src}
+          alt="Beach portrait"
+          class="w-full h-full object-cover"
+          style="object-position: center 20%;"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+    </div>
+  ))}
+</div>
+
+<!-- Lightbox Dialog -->
+<dialog id="lightbox" aria-label="Photo lightbox">
+  <button id="lb-close" class="absolute top-5 right-6 text-white/60 hover:text-white transition-colors cursor-pointer z-10" aria-label="Close lightbox">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <button id="lb-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors cursor-pointer z-10 p-2" aria-label="Previous photo">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <div class="flex items-center justify-center w-full h-full">
+    <img id="lb-img" src="" alt="Beach portrait" class="max-w-full max-h-[90vh] object-contain shadow-2xl" />
+  </div>
+  <button id="lb-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors cursor-pointer z-10 p-2" aria-label="Next photo">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div id="lb-counter" class="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/50 text-caption font-sans"></div>
+</dialog>
+
+<style>
+  .photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .grid-item {
+    flex: 1 1 calc(50% - 6px);
+    max-width: calc(50% - 3px);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  @media (min-width: 640px) {
+    .grid-item {
+      flex: 1 1 calc(33.333% - 6px);
+      max-width: calc(33.333% - 4px);
+    }
+  }
+  @media (min-width: 1024px) {
+    .grid-item {
+      flex: 1 1 calc(25% - 6px);
+      max-width: calc(25% - 5px);
+    }
+  }
+  .grid-item.hidden-item {
+    display: none;
+  }
+  /* Filter buttons */
+  .filter-btn {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.65rem;
+    padding: 0.5rem 1.2rem;
+    background: transparent;
+    color: var(--color-charcoal-600);
+    border: 1px solid var(--color-charcoal-900);
+  }
+  .filter-btn:hover {
+    background: var(--color-charcoal-900);
+    color: var(--color-ivory-50);
+  }
+  .filter-btn.active {
+    background: var(--color-charcoal-900);
+    color: var(--color-ivory-50);
+  }
+
+  /* Lightbox */
+  #lightbox {
+    border: none; padding: 1rem; outline: none;
+    display: none;
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    max-width: 100vw; max-height: 100vh;
+    margin: 0;
+    background: hsl(210 30% 6% / 0.96);
+    z-index: 100;
+    align-items: center; justify-content: center;
+  }
+  #lightbox[open] { display: flex; }
+  #lightbox::backdrop { background: transparent; }
+</style>
+
+<script>
+  // --- Filter logic ---
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const gridItems = document.querySelectorAll('.grid-item');
+
+  filterBtns.forEach(btn => btn.addEventListener('click', () => {
+    const filter = (btn as HTMLElement).dataset.filter!;
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    gridItems.forEach(item => {
+      const cat = (item as HTMLElement).dataset.category;
+      if (filter === 'all' || cat === filter) {
+        item.classList.remove('hidden-item');
+      } else {
+        item.classList.add('hidden-item');
+      }
+    });
+  }));
+
+  // --- Lightbox ---
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement;
+  const lbImg = document.getElementById('lb-img') as HTMLImageElement;
+  const lbCounter = document.getElementById('lb-counter')!;
+  const triggers = document.querySelectorAll('.photo-trigger');
+  const srcs = Array.from(triggers).map(t => (t as HTMLElement).dataset.src!);
+  let lbIndex = 0;
+
+  function openLb(idx: number) {
+    lbIndex = idx;
+    lbImg.src = srcs[idx];
+    lbCounter.textContent = `${idx + 1} / ${srcs.length}`;
+    dialog.showModal();
+  }
+  function closeLb() { dialog.close(); }
+  function prevLb() { openLb((lbIndex - 1 + srcs.length) % srcs.length); }
+  function nextLb() { openLb((lbIndex + 1) % srcs.length); }
+
+  triggers.forEach((t, i) => t.addEventListener('click', () => openLb(i)));
+  document.getElementById('lb-close')?.addEventListener('click', closeLb);
+  document.getElementById('lb-prev')?.addEventListener('click', prevLb);
+  document.getElementById('lb-next')?.addEventListener('click', nextLb);
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) closeLb(); });
+  document.addEventListener('keydown', (e) => {
+    if (!dialog.open) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') prevLb();
+    if (e.key === 'ArrowRight') nextLb();
+  });
+</script>

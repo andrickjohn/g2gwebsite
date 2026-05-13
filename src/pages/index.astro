@@ -1,50 +1,287 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import HeroSlideshow from '../components/HeroSlideshow.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import Reviews from '../components/Reviews.astro';
 
-// Grins2Go Landing Page
+import reviewsData from '../data/reviews.json';
+import galleryData from '../data/gallery.json';
+
+// Featured gallery — curated 8 across categories (morning-first)
+const featured = [
+  galleryData.find(i => i.category === 'morning'),
+  galleryData.find(i => i.category === 'groups'),
+  galleryData.find(i => i.category === 'families'),
+  galleryData.find(i => i.category === 'sunset'),
+  galleryData.find(i => i.category === 'couples'),
+  galleryData.filter(i => i.category === 'morning')[3],
+  galleryData.filter(i => i.category === 'hyatt')[2],
+  galleryData.find(i => i.category === 'wailea'),
+].filter(Boolean) as typeof galleryData;
+
+const featuredReviews = reviewsData.slice(0, 12);
 ---
 
-<Layout>
-	<main>
-		<!-- Hero Section -->
-		<section class="min-h-[80vh] flex items-center bg-[linear-gradient(rgba(13,47,47,0.4),rgba(13,47,47,0.4)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2073')] bg-center bg-cover bg-no-repeat text-white">
-			<div class="container-custom">
-				<div class="reveal reveal-visible max-w-3xl">
-					<span class="text-gold-500 italic font-serif text-lg tracking-wide">Maui Portrait Photography</span>
-					<h1 class="text-white text-[clamp(2.5rem,8vw,4.5rem)] leading-tight my-fluid-s">
-						Family Memories That <br /><span class="italic">Last a Lifetime</span>
-					</h1>
-					<p class="max-w-[50ch] text-fluid-s mb-fluid-m opacity-90">
-						Capturing the warmth of the sun and the joy of your family in the most beautiful beaches of Maui.
-					</p>
-					<div class="flex flex-wrap gap-fluid-s">
-						<a href="#gallery" class="px-fluid-m py-fluid-s bg-gold-500 text-teal-900 rounded-lg font-medium uppercase tracking-[0.1em] text-xs transition-all hover:bg-gold-600">
-							View Galleries
-						</a>
-						<a href="#booking" class="px-fluid-m py-fluid-s border border-white/50 text-white rounded-lg font-medium uppercase tracking-[0.1em] text-xs backdrop-blur-md transition-all hover:bg-white/10">
-							Book a Session
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
+<Layout
+  title="Beach Portraits Maui | Grins2Go Photography"
+  description="Maui's premier beach portrait photographers since 2006. 20,000+ sessions, 284 five-star reviews. Families, couples, groups & weddings. Call (808) 242-1424."
+>
+  <Navbar />
 
-		<!-- Trust / Stats Bar -->
-		<section class="bg-sand-50">
-			<div class="container-custom grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-fluid-l py-fluid-l text-center border-b border-teal-900/10">
-				<div class="flex flex-col gap-1">
-					<span class="font-serif text-5xl text-gold-500">15+</span>
-					<span class="uppercase tracking-[0.2em] text-[0.7rem] text-teal-900/60 font-medium">Years in Maui</span>
-				</div>
-				<div class="flex flex-col gap-1">
-					<span class="font-serif text-5xl text-gold-500">2k+</span>
-					<span class="uppercase tracking-[0.2em] text-[0.7rem] text-teal-900/60 font-medium">Happy Families</span>
-				</div>
-				<div class="flex flex-col gap-1">
-					<span class="font-serif text-5xl text-gold-500">5.0</span>
-					<span class="uppercase tracking-[0.2em] text-[0.7rem] text-teal-900/60 font-medium">Rating</span>
-				</div>
-			</div>
-		</section>
-	</main>
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <HeroSlideshow />
+
+  <!-- ═══════════════ TRUST BAR ═══════════════ -->
+  <section class="bg-charcoal-900 text-white relative" aria-label="Trust credentials">
+    <div class="gold-rule"></div>
+    <div class="container-custom">
+      <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/8">
+        {[
+          { end: 20, suffix: '+', label: 'Years on Maui' },
+          { end: 20, suffix: 'k+', label: 'Sessions Photographed' },
+          { end: 284, suffix: '', label: 'Five-Star Reviews' },
+          { end: 5, suffix: '.0 ★', label: 'Average Rating' },
+        ].map(({ end, suffix, label }) => (
+          <div class="flex flex-col items-center justify-center gap-1 py-8 px-4 text-center">
+            <span
+              class="font-serif text-4xl leading-none"
+              style="color: var(--color-gold-400);"
+              data-count={end}
+              data-suffix={suffix}
+            >0{suffix}</span>
+            <span class="text-caption text-white/40 uppercase tracking-[0.2em]">{label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="gold-rule"></div>
+  </section>
+
+  <!-- ═══════════════ SPECIALISTS ═══════════════ -->
+  <section class="section-pad bg-ivory-50 relative overflow-hidden" aria-label="About our specialty">
+    <!-- Pineapple watermark -->
+    <div class="absolute inset-0 pineapple-watermark pointer-events-none"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="grid md:grid-cols-2 gap-fluid-xl items-center">
+        <!-- Image -->
+        <div class="reveal photo-hover overflow-hidden" style="aspect-ratio: 3/2;">
+          <img
+            src="/uploads/2017/09/Maui-Beach-Family-Portrait-004-06-L.jpg"
+            alt="Family walking on Maui beach — morning portrait session"
+            class="w-full h-full object-cover"
+            style="object-position: center center;"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Copy -->
+        <div class="reveal flex flex-col gap-6">
+          <p class="text-eyebrow">It's All We Do</p>
+          <h2 class="text-headline">
+            Beach Portraits.<br/>
+            <em class="italic text-charcoal-600">Fast. Fun. Professional.</em>
+          </h2>
+          <span class="accent-line"></span>
+
+          <div class="flex flex-col gap-4 text-charcoal-600">
+            <p class="text-body-lg">
+              Most Maui photographers do this on the side — real estate shoots in the morning, food photography at lunch, your family squeezed in between. We do beach portraits. It's the only thing we do.
+            </p>
+            <p>
+              Other portrait photographers claim they add value with longer sessions and multiple locations. We've learned the opposite. Everyone is tired of posing and smiling after 20 minutes. We've engineered our sessions to get the best arrangements in the shortest time — reliably creating photos people love, without the pain and hassle.
+            </p>
+            <p>
+              20,000+ sessions since 2006. We get it right in the camera and show them to you quickly. Fast turnaround. No guesswork.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            {[
+              '🌅 Morning & Sunset Sessions',
+              '👨‍👩‍👧‍👦 Families & Groups',
+              '💑 Couples & Engagements',
+              '💍 Weddings & Events',
+            ].map(item => (
+              <div class="flex items-center gap-2 text-charcoal-500">
+                <span class="text-caption">{item}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="flex gap-4 pt-2">
+            <a href="/gallery" class="btn-gold">See Our Work</a>
+            <a href="/about" class="btn-outline-dark">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ MORNING SESSIONS ═══════════════ -->
+  <section class="section-pad bg-charcoal-900 text-white relative overflow-hidden" aria-label="Morning sessions">
+    <div class="absolute inset-0 opacity-4" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><circle cx=%2230%22 cy=%2230%22 r=%221%22 fill=%22white%22/></svg>'); background-size: 60px 60px;"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="grid md:grid-cols-2 gap-fluid-xl items-center">
+        <!-- Copy first on desktop -->
+        <div class="reveal flex flex-col gap-6 order-2 md:order-1">
+          <p class="text-eyebrow">Our Specialty</p>
+          <h2 class="text-headline text-white">
+            Morning Light.<br/>
+            <em class="italic text-white/80">Maui's Best-Kept Secret.</em>
+          </h2>
+          <span class="accent-line"></span>
+
+          <div class="flex flex-col gap-4 text-white/65">
+            <p class="text-body-lg">
+              Most photographers push sunset sessions. We focus on mornings — and there's a reason. Maui's morning light is softer, warmer, and more colorful. The beaches are emptier. The wind is calmer. The heat is gentler.
+            </p>
+            <p>
+              We shoot multiple morning sessions daily, starting around 7:30 AM. By 11 AM, we've captured images that rival anything the golden hour produces — without the crowds, the squinting, or the one-shot pressure of a single sunset.
+            </p>
+            <p>
+              Sunset sessions are available too — premium, limited to one per evening, and worth every penny when the sky cooperates. But mornings? Mornings we can guarantee.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-6 pt-2">
+            <div class="flex flex-col border-l-2 pl-4" style="border-color: var(--color-gold-500);">
+              <span class="font-serif text-2xl text-white">7:30 AM</span>
+              <span class="text-caption text-white/40 uppercase tracking-[0.15em]">First Session</span>
+            </div>
+            <div class="flex flex-col border-l-2 pl-4" style="border-color: var(--color-gold-500);">
+              <span class="font-serif text-2xl text-white">~11 AM</span>
+              <span class="text-caption text-white/40 uppercase tracking-[0.15em]">Last Morning Session</span>
+            </div>
+          </div>
+
+          <a href="tel:+18082421424" class="btn-gold w-fit mt-2">Book a Morning Session</a>
+        </div>
+
+        <!-- Morning images grid -->
+        <div class="reveal order-1 md:order-2 grid grid-cols-2 gap-2">
+          <div class="photo-hover aspect-[3/4] overflow-hidden col-span-2">
+            <img src="/uploads/2017/09/Maui-Beach-Portraits-Morning-001-06-L.jpg" alt="Morning beach portrait Maui" class="w-full h-full object-cover" style="object-position: center 20%;" loading="lazy" />
+          </div>
+          <div class="photo-hover aspect-square overflow-hidden">
+            <img src="/uploads/2017/09/Maui-Beach-Portraits-Morning-007-06-L.jpg" alt="Morning family portrait" class="w-full h-full object-cover" style="object-position: center 20%;" loading="lazy" />
+          </div>
+          <div class="photo-hover aspect-square overflow-hidden">
+            <img src="/uploads/2017/09/Maui-Beach-Portraits-Morning-012-06-L.jpg" alt="Morning couple portrait" class="w-full h-full object-cover" style="object-position: center 20%;" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ GALLERY PREVIEW ═══════════════ -->
+  <section class="section-pad bg-ivory-50" id="gallery" aria-label="Featured portfolio">
+    <div class="container-custom">
+      <div class="text-center mb-fluid-xl reveal">
+        <p class="text-eyebrow mb-4">The Work</p>
+        <h2 class="text-headline mb-4">20,000 Sessions. One Standard.</h2>
+        <span class="accent-line-center mb-6"></span>
+        <p class="text-body-lg text-charcoal-500 max-w-[48ch] mx-auto">
+          Families, couples, groups, weddings, and events — every session is different, every image is crafted to last.
+        </p>
+      </div>
+      <PhotoGrid images={featured} limit={8} />
+      <div class="text-center mt-12 reveal">
+        <a href="/gallery" class="btn-outline-dark">
+          View Full Gallery
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ GROUPS ═══════════════ -->
+  <section class="section-pad bg-ivory-100" aria-label="Groups and reunions">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-fluid-xl items-center">
+        <div class="reveal flex flex-col gap-6">
+          <p class="text-eyebrow">Groups & Reunions</p>
+          <h2 class="text-headline">
+            You Got Everyone to Maui.<br/>
+            <em class="italic text-charcoal-600">That Was the Hard Part.</em>
+          </h2>
+          <span class="accent-line"></span>
+          <p class="text-body-lg text-charcoal-600">
+            Multi-generational reunions. Corporate retreats. Extended families who haven't all been in the same place in years. We've photographed groups of 40+ and we have a system that makes it look effortless.
+          </p>
+          <p class="text-charcoal-500">
+            Many photographers will take a group booking. Very few have done enough of them to handle the logistics — arranging people by height and relationship, managing attention, keeping energy up, and nailing the shot before anyone gets restless.
+          </p>
+          <p class="text-charcoal-500">
+            We make it fun. We make it fast. And we make it look like everyone wanted to be there — because by the time we're done, they did.
+          </p>
+          <a href="/pricing" class="btn-gold w-fit">
+            View Group Pricing
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="reveal grid grid-cols-2 gap-2">
+          <div class="photo-hover overflow-hidden col-span-2" style="aspect-ratio: 3/2;">
+            <img src="/uploads/2017/09/Maui-Beach-Family-Group-Portrait-001-06-L.jpg" alt="Large group beach portrait — 20+ people on Maui beach" class="w-full h-full object-cover" style="object-position: center center;" loading="lazy" />
+          </div>
+          <div class="photo-hover overflow-hidden" style="aspect-ratio: 3/2;">
+            <img src="/uploads/2017/09/Maui-Hyatt-Family-Group-Portrait-005-06-L.jpg" alt="Family group at Hyatt Maui" class="w-full h-full object-cover" style="object-position: center top;" loading="lazy" />
+          </div>
+          <div class="photo-hover overflow-hidden" style="aspect-ratio: 3/2;">
+            <img src="/uploads/2017/09/Maui-Hyatt-Family-Group-Portrait-009-06-L.jpg" alt="Beach family reunion portrait" class="w-full h-full object-cover" style="object-position: center top;" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ REVIEWS ═══════════════ -->
+  <section class="section-pad bg-ivory-50" aria-label="Customer reviews">
+    <div class="container-custom">
+      <div class="text-center mb-fluid-xl reveal">
+        <div class="stars text-2xl mb-3" style="color: var(--color-gold-500);">★★★★★</div>
+        <p class="text-eyebrow mb-4">284 Five-Star Reviews</p>
+        <h2 class="text-headline mb-4">Families Keep Coming Back</h2>
+        <span class="accent-line-center mb-6"></span>
+        <p class="text-body-lg text-charcoal-500 max-w-[38ch] mx-auto">
+          We don't ask for reviews. Families leave them because they genuinely want others to know.
+        </p>
+      </div>
+      <Reviews reviews={featuredReviews} featured={true} />
+      <div class="text-center mt-10 reveal">
+        <a href="/reviews" class="btn-outline-dark">
+          Read All 284 Reviews
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FINAL CTA ═══════════════ -->
+  <section class="relative py-32 text-white text-center overflow-hidden" aria-label="Book your session">
+    <div class="absolute inset-0 z-0">
+      <img src="/uploads/2017/09/Maui-Beach-Portrait-Sunset-015-08-L.jpg" alt="Maui sunset beach" class="w-full h-full object-cover" style="object-position: center 30%;" loading="lazy" />
+      <div class="absolute inset-0 bg-charcoal-950/65"></div>
+    </div>
+    <div class="relative z-10 container-custom flex flex-col items-center gap-6 reveal">
+      <p class="text-eyebrow" style="color: var(--color-gold-400);">Ready?</p>
+      <h2 class="text-headline text-white max-w-[22ch]">
+        Ready to Make Memories<br/>
+        <em class="italic text-white/80">That Last Forever?</em>
+      </h2>
+      <p class="text-body-lg text-white/55 max-w-[44ch]">
+        Sessions start at just $99. Call us — no pressure, no online forms. We'll answer every question and find the perfect time for your family.
+      </p>
+      <a href="tel:+18082421424" class="btn-gold mt-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (808) 242-1424
+      </a>
+      <p class="text-caption text-white/30 mt-2">Mon – Sun · 6 AM – 8 PM Hawaii Time</p>
+    </div>
+  </section>
+
+  <Footer />
 </Layout>

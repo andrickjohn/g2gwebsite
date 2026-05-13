@@ -1,0 +1,65 @@
+---
+// Footer — corrected address, no personal names
+---
+
+<footer class="bg-charcoal-950 text-white relative overflow-hidden">
+  <!-- Gold rule top -->
+  <div class="gold-rule"></div>
+
+  <div class="container-custom section-pad-sm">
+    <div class="grid md:grid-cols-4 gap-12 lg:gap-16">
+
+      <!-- Brand -->
+      <div class="md:col-span-2 flex flex-col gap-5">
+        <a href="/" class="flex items-center gap-3">
+          <img src="/images/logo-200-light.png" alt="Grins2Go Beach Portraits Maui" class="h-14 w-auto" />
+        </a>
+        <p class="text-caption text-white/45 leading-relaxed max-w-[42ch]">
+          Maui's premier beach portrait photographers since 2006. Specializing in families, couples, groups, weddings, and events on Maui's finest beaches.
+        </p>
+        <div class="stars text-sm">★★★★★ <span class="text-white/40">284 Five-Star Reviews</span></div>
+      </div>
+
+      <!-- Quick links -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-eyebrow mb-1">Navigate</h3>
+        {[
+          ['/', 'Home'],
+          ['/gallery', 'Gallery'],
+          ['/pricing', 'Pricing'],
+          ['/reviews', 'Reviews'],
+          ['/about', 'About'],
+        ].map(([href, label]) => (
+          <a href={href} class="text-caption text-white/45 hover:text-gold-400 transition-colors">{label}</a>
+        ))}
+      </div>
+
+      <!-- Contact -->
+      <div class="flex flex-col gap-4">
+        <h3 class="text-eyebrow mb-1">Contact</h3>
+        <a href="tel:+18082421424" class="text-caption text-gold-400 hover:text-gold-300 transition-colors font-medium">
+          (808) 242-1424
+        </a>
+        <a href="mailto:info@beachportraitsmaui.com" class="text-caption text-white/45 hover:text-gold-400 transition-colors">
+          info@beachportraitsmaui.com
+        </a>
+        <div class="text-caption text-white/35 leading-relaxed mt-2">
+          <p>Hyatt Regency Maui Resort & Spa</p>
+          <p>200 Nohea Kai Drive</p>
+          <p>Ka'anapali, Hawaii 96761</p>
+        </div>
+        <p class="text-caption text-white/30 mt-1">Mon–Sun · 6 AM – 8 PM HST</p>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-white/8 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-caption text-white/25">
+        © {new Date().getFullYear()} Grins2Go Beach Portraits Maui. All rights reserved.
+      </p>
+      <p class="text-caption text-white/20">
+        beachportraitsmaui.com
+      </p>
+    </div>
+  </div>
+</footer>

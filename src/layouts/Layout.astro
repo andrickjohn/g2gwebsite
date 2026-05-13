@@ -2,24 +2,124 @@
 import '../styles/global.css';
 
 interface Props {
-	title?: string;
-	description?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
-const { title = 'Grins2Go | Beach Portraits Maui', description = 'Professional family and sunset photography in Maui.' } = Astro.props;
+const {
+  title = 'Beach Portraits Maui | Grins2Go Photography',
+  description = 'Maui\'s premier beach portrait photographers since 2006. 20,000+ sessions, 284 five-star reviews. Families, couples, groups & weddings on Maui\'s finest beaches. Call (808) 242-1424.',
+  image = '/uploads/2017/09/Maui-Beach-Family-Portrait-001-06-L.jpg',
+  canonicalURL = Astro.url.href,
+} = Astro.props;
+
+const fullTitle = title.includes('Grins2Go') || title.includes('Beach Portraits Maui') ? title : `${title} | Beach Portraits Maui`;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#141a21" />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url).href} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url).href} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Beach Portraits Maui — Grins2Go Photography",
+        "url": "https://www.beachportraitsmaui.com",
+        "telephone": "+1-808-242-1424",
+        "email": "info@beachportraitsmaui.com",
+        "description": "Maui's premier beach portrait photographers since 2006. Families, couples, groups, weddings & events at Ka'anapali, Wailea, and beyond.",
+        "priceRange": "$$",
+        "image": "https://www.beachportraitsmaui.com/uploads/2017/09/Maui-Beach-Family-Portrait-001-06-L.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "200 Nohea Kai Drive",
+          "addressLocality": "Ka'anapali",
+          "addressRegion": "HI",
+          "postalCode": "96761",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 20.9251,
+          "longitude": -156.6936
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "284",
+          "bestRating": "5"
+        },
+        "foundingDate": "2006"
+      })}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" />
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Scroll reveal with stagger -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        }),
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // Animated counters
+      const counterObserver = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target as HTMLElement;
+            const end = parseInt(el.dataset.count || '0');
+            const suffix = el.dataset.suffix || '';
+            const duration = 1800;
+            const start = performance.now();
+            const animate = (now: number) => {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.floor(eased * end).toLocaleString() + suffix;
+              if (progress < 1) requestAnimationFrame(animate);
+            };
+            requestAnimationFrame(animate);
+            counterObserver.unobserve(el);
+          }
+        }),
+        { threshold: 0.5 }
+      );
+      document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+    </script>
+  </body>
 </html>

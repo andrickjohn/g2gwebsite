@@ -1,0 +1,207 @@
+---
+/**
+ * Hero slideshow with smooth crossfade transitions.
+ * Click anywhere on hero to advance. Minimal overlay — text uses shadows.
+ */
+interface Slide {
+  src: string;
+  alt: string;
+  quote?: string;
+  author?: string;
+  location?: string;
+}
+
+const slides: Slide[] = [
+  {
+    src: '/uploads/2017/09/Maui-Beach-Wailea-Portait-003-06-L.jpg',
+    alt: 'Family of four walking hand-in-hand on Maui beach',
+    quote: 'This is a first class company.',
+    author: 'The Sundquist Family',
+    location: 'Pleasanton, CA',
+  },
+  {
+    src: '/uploads/2017/09/Maui-Beach-Sunset-Family-001-08-L.jpg',
+    alt: 'Family lying on sand with dramatic Maui sunset behind them',
+    quote: 'Just magical.',
+    author: 'The Taylor Family',
+    location: 'Carrollton, TX',
+  },
+  {
+    src: '/uploads/2017/09/Maui-Beach-Portraits-Morning-001-06-L.jpg',
+    alt: 'Family portrait in beautiful Maui morning light',
+    quote: 'The photos are AMAZING!',
+    author: 'The Mitchell Family',
+    location: 'Denver, CO',
+  },
+  {
+    src: '/uploads/2017/09/Maui-Hyatt-Family-Group-Portrait-005-06-L.jpg',
+    alt: 'Large family group arranged on Maui beach',
+    quote: 'Handled all 15 of us with ease.',
+    author: 'The Unger Family',
+    location: 'Edmonds, WA',
+  },
+  {
+    src: '/uploads/2017/09/Maui-Beach-Portrait-couple-016-07-L.jpg',
+    alt: 'Couple portrait at sunset on Maui beach',
+    quote: 'If there were more stars I would give them.',
+    author: 'The Sears Family',
+    location: 'Millersburg, OH',
+  },
+  {
+    src: '/uploads/2017/09/Maui-Sunset-Family-Beach-Portrait-001-08-L.jpg',
+    alt: 'Dramatic family portrait at Maui sunset',
+    quote: 'I was so pleased with our experience.',
+    author: 'The Ruvolo Family',
+    location: 'La Mirada, CA',
+  },
+];
+---
+
+<section id="hero" class="relative min-h-screen flex items-end overflow-hidden cursor-pointer" aria-label="Grins2Go Beach Portraits Maui hero">
+
+  <!-- Slideshow background -->
+  <div class="absolute inset-0 z-0" id="hero-slides">
+    {slides.map((slide, i) => (
+      <div
+        class:list={['hero-slide absolute inset-0', { 'active': i === 0 }]}
+        data-index={i}
+      >
+        <img
+          src={slide.src}
+          alt={slide.alt}
+          class="w-full h-full object-cover"
+          style="object-position: center 20%;"
+          fetchpriority={i === 0 ? 'high' : 'low'}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+      </div>
+    ))}
+
+    <!-- Gradient — strong enough for text readability, fades to fully transparent at top -->
+    <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, hsl(210 30% 6% / 0.8) 0%, hsl(210 30% 6% / 0.45) 30%, hsl(210 30% 6% / 0.1) 55%, transparent 70%);"></div>
+  </div>
+
+
+
+  <!-- Content — bottom left with text shadows for readability -->
+  <div class="relative z-20 container-custom pb-20 pt-40 w-full">
+    <div class="max-w-3xl">
+
+      <!-- Headline -->
+      <h1
+        class="hero-text-shadow text-display text-white mb-8"
+        style="animation: fadeUp 0.7s 0.1s ease both;"
+      >
+        The Best Thing<br/>
+        <em class="italic text-white/90">We Did on Maui.</em>
+      </h1>
+
+      <!-- Rotating quote -->
+      <div class="mb-10" style="animation: fadeUp 0.7s 0.2s ease both;">
+        <div id="hero-quote" class="transition-opacity duration-500">
+          <p class="hero-text-shadow text-white italic font-serif max-w-[42ch]" style="font-size: 1.25rem; line-height: 1.5;">
+            "{slides[0].quote}"
+          </p>
+          <p class="hero-text-shadow text-white/70 mt-2 font-sans uppercase tracking-[0.15em]" style="font-size: 0.7rem;">
+            — {slides[0].author}, {slides[0].location}
+          </p>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div
+        class="flex flex-wrap items-center gap-4"
+        style="animation: fadeUp 0.7s 0.3s ease both;"
+      >
+        <a href="/gallery" class="btn-gold" onclick="event.stopPropagation()">
+          View Our Work
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:+18082421424" class="btn-outline-white" onclick="event.stopPropagation()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call (808) 242-1424
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide indicator pips -->
+  <div class="absolute bottom-8 right-8 z-20 flex gap-2" id="hero-pips">
+    {slides.map((_, i) => (
+      <button
+        class:list={['hero-pip w-1.5 h-1.5 rounded-full transition-all duration-500 cursor-pointer', { 'bg-white w-6': i === 0, 'bg-white/30': i !== 0 }]}
+        data-index={i}
+        aria-label={`Go to slide ${i + 1}`}
+        onclick="event.stopPropagation()"
+      ></button>
+    ))}
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-40" style="animation: fadeIn 1s 1.5s ease both;">
+    <span class="uppercase tracking-[0.3em] text-white font-sans" style="font-size: 0.5rem; writing-mode: vertical-rl;">Scroll</span>
+    <svg width="1" height="32" viewBox="0 0 1 32"><line x1="0.5" y1="0" x2="0.5" y2="32" stroke="white" stroke-width="0.5" stroke-dasharray="2 3"><animate attributeName="y1" values="0;32;0" dur="2s" repeatCount="indefinite"/></line></svg>
+  </div>
+</section>
+
+<style>
+  .hero-slide {
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
+  .hero-slide.active {
+    opacity: 1;
+  }
+
+  /* Text shadow for readability without heavy overlays */
+  .hero-text-shadow {
+    text-shadow: 0 2px 12px hsl(210 30% 6% / 0.6), 0 1px 3px hsl(210 30% 6% / 0.4);
+  }
+</style>
+
+<script define:vars={{ slidesData: slides.map(s => ({ quote: s.quote, author: s.author, location: s.location })) }}>
+  const heroSection = document.getElementById('hero');
+  const allSlides = document.querySelectorAll('.hero-slide');
+  const pips = document.querySelectorAll('.hero-pip');
+  const quoteEl = document.getElementById('hero-quote');
+  let current = 0;
+  const total = allSlides.length;
+
+  function goTo(idx) {
+    allSlides[current].classList.remove('active');
+
+    current = ((idx % total) + total) % total;
+    allSlides[current].classList.add('active');
+
+    pips.forEach((p, i) => {
+      if (i === current) {
+        p.className = 'hero-pip w-6 h-1.5 rounded-full transition-all duration-500 cursor-pointer bg-white';
+      } else {
+        p.className = 'hero-pip w-1.5 h-1.5 rounded-full transition-all duration-500 cursor-pointer bg-white/30';
+      }
+    });
+
+    if (quoteEl) {
+      quoteEl.style.opacity = '0';
+      setTimeout(() => {
+        const d = slidesData[current];
+        quoteEl.innerHTML = `
+          <p class="hero-text-shadow text-white italic font-serif max-w-[42ch]" style="font-size: 1.25rem; line-height: 1.5;">"${d.quote}"</p>
+          <p class="hero-text-shadow text-white/70 mt-2 font-sans uppercase tracking-[0.15em]" style="font-size: 0.7rem;">— ${d.author}, ${d.location}</p>
+        `;
+        quoteEl.style.opacity = '1';
+      }, 400);
+    }
+  }
+
+  // Click hero to advance
+  heroSection?.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
+  // Pip clicks
+  pips.forEach((pip, i) => pip.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); resetTimer(); }));
+
+  // Auto advance
+  let timer = setInterval(() => goTo(current + 1), 6000);
+  function resetTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 6000); }
+</script>

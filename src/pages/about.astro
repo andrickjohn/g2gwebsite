@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="About Us | Beach Portraits Maui — Grins2Go"
+  description="Maui's premier beach portrait photography company since 2006. 20,000+ sessions, 284 five-star reviews. Located at the Hyatt Regency Maui Resort & Spa."
+>
+  <Navbar />
+
+  <!-- Hero -->
+  <section class="relative pt-36 pb-20 bg-charcoal-950 text-white text-center">
+    <div class="absolute inset-0 opacity-15">
+      <img src="/uploads/2017/09/Maui-Beach-Wailea-Portait-003-06-L.jpg" alt="" class="w-full h-full object-cover" loading="eager" aria-hidden="true" />
+    </div>
+    <div class="relative z-10 container-custom">
+      <p class="text-eyebrow mb-4">Since 2006</p>
+      <h1 class="text-headline text-white mb-4">About Grins2Go</h1>
+      <span class="accent-line-center mb-6"></span>
+      <p class="text-body-lg text-white/55 max-w-[46ch] mx-auto">
+        One company. One focus. Making your Maui memories last a lifetime.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Story -->
+  <section class="section-pad bg-ivory-50">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-fluid-xl items-center max-w-5xl mx-auto">
+        <div class="reveal">
+          <div class="relative photo-hover">
+            <img
+              src="/uploads/2017/09/Maui-Beach-Portraits-Morning-005-06-L.jpg"
+              alt="Grins2Go Photography — morning beach session"
+              class="w-full object-cover aspect-[4/5]"
+              loading="lazy"
+            />
+            <div class="absolute -bottom-5 -right-5 bg-charcoal-900 text-white p-6 hidden md:block">
+              <span class="font-serif text-3xl block leading-none" style="color: var(--color-gold-400);">20k+</span>
+              <span class="text-caption uppercase tracking-[0.2em] text-white/50 mt-1 block">Sessions</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal flex flex-col gap-6">
+          <p class="text-eyebrow">Our Story</p>
+          <h2 class="text-headline">Beach Portraits. <em class="italic" style="color: var(--color-gold-600);">It's All We Do.</em></h2>
+          <span class="accent-line"></span>
+
+          <div class="flex flex-col gap-4 text-charcoal-600">
+            <p class="text-body-lg">
+              Grins2Go didn't stumble into beach photography. We moved to Maui in 2006 because we believed it was the most beautiful place in the world to create portraits — and 20 years later, we still believe it.
+            </p>
+            <p>
+              We are full-time beach portrait specialists. Not food photographers who "also do families." Not wedding photographers squeezing in a quick session between events. Beach portraits are the only thing we do, and we've spent 20,000+ sessions getting extraordinarily good at it.
+            </p>
+            <p>
+              We masterfully handle individuals, couples, families, groups, weddings, engagements, honeymoons, vow renewals, and events — all outdoors on the beach with the challenges of people, weather, lighting, tides, and the elements. That's the craft. And there is no substitute for the volume of experience we bring to every session.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-5 pt-2">
+            {[
+              { stat: '2006',  label: 'Established' },
+              { stat: '20k+', label: 'Sessions' },
+              { stat: '284',  label: '5-Star Reviews' },
+              { stat: '5.0',  label: 'Avg Rating' },
+            ].map(({ stat, label }) => (
+              <div class="flex flex-col gap-1 border-l-2 pl-4" style="border-color: var(--color-gold-500);">
+                <span class="font-serif text-3xl text-charcoal-900 leading-none">{stat}</span>
+                <span class="text-caption uppercase tracking-[0.2em] text-charcoal-500">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="section-pad bg-charcoal-900 text-white">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-fluid-xl items-center">
+        <div class="reveal flex flex-col gap-6">
+          <p class="text-eyebrow" style="color: var(--color-gold-400);">Home Base</p>
+          <h2 class="text-headline text-white">Hyatt Regency <em class="italic">Maui</em></h2>
+          <span class="accent-line"></span>
+          <p class="text-body-lg text-white/60">
+            Our studio is located at the Hyatt Regency Maui Resort & Spa — one of the most iconic resorts in Ka'anapali. The grounds are excellent, notably beyond what most resorts offer for portrait settings.
+          </p>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-start gap-4 border border-white/10 p-4">
+              <svg class="text-gold-500 shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <p class="font-medium text-white text-sm mb-1">Studio Address</p>
+                <p class="text-caption text-white/50 leading-relaxed">Hyatt Regency Maui Resort & Spa<br/>200 Nohea Kai Drive<br/>Ka'anapali, Hawaii 96761</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 border border-white/10 p-4">
+              <svg class="text-gold-500 shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div>
+                <p class="font-medium text-white text-sm mb-1">Phone</p>
+                <a href="tel:+18082421424" class="text-caption hover:text-gold-300 transition-colors" style="color: var(--color-gold-400);">(808) 242-1424</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 border border-white/10 p-4">
+              <svg class="text-gold-500 shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <div>
+                <p class="font-medium text-white text-sm mb-1">Email</p>
+                <a href="mailto:info@beachportraitsmaui.com" class="text-caption hover:text-gold-300 transition-colors" style="color: var(--color-gold-400);">info@beachportraitsmaui.com</a>
+              </div>
+            </div>
+          </div>
+          <a href="tel:+18082421424" class="btn-gold w-fit mt-2">Call to Book</a>
+        </div>
+
+        <div class="reveal photo-hover">
+          <img src="/uploads/2017/10/Hyatt-Maui-Morning-025.jpg" alt="Hyatt Regency Maui grounds" class="w-full object-cover aspect-[4/3]" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Grins2Go -->
+  <section class="section-pad bg-ivory-50 relative overflow-hidden">
+    <div class="absolute inset-0 pineapple-watermark pointer-events-none"></div>
+    <div class="container-custom relative z-10">
+      <div class="text-center mb-fluid-xl reveal">
+        <p class="text-eyebrow mb-4">Why Grins2Go</p>
+        <h2 class="text-headline mb-4">What Sets Us Apart</h2>
+        <span class="accent-line-center"></span>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto reveal-stagger">
+        {[
+          {
+            icon: '🎯',
+            title: 'Pure Specialization',
+            body: "We don't do real estate. We don't do food. Beach portraits are the only thing we do — and 20 years of focus shows in every frame."
+          },
+          {
+            icon: '🌅',
+            title: 'Morning Light Mastery',
+            body: "We've spent 20 years learning exactly when and where Maui's morning light is at its most breathtaking. Multiple sessions daily, starting at 7:30 AM."
+          },
+          {
+            icon: '👨‍👩‍👧‍👦',
+            title: 'Group Wrangling Experts',
+            body: "10 people? 20? 40+? We've done it. We know how to arrange, engage, and capture large groups where every face looks great."
+          },
+          {
+            icon: '⚡',
+            title: 'Engineered for Results',
+            body: "Other photographers offer longer sessions and multiple locations. We've learned the opposite: everyone is tired of posing after 20 minutes. We get the best shots in the shortest time, every time."
+          },
+          {
+            icon: '🤝',
+            title: 'No-Pressure Process',
+            body: "Phone only. No auto-booking, no checkout flow. You talk to a real person who answers your real questions."
+          },
+          {
+            icon: '🔄',
+            title: 'Repeat Families',
+            body: "We don't just have testimonials — we have families who fly back to Maui and book us again. Year after year. That's not marketing. That's proof."
+          },
+        ].map(({ icon, title, body }) => (
+          <div class="reveal flex flex-col gap-4 p-7 border border-charcoal-900/6 bg-white hover:border-gold-500/30 hover:shadow-lg transition-all duration-300">
+            <span class="text-3xl">{icon}</span>
+            <h3 class="font-serif text-lg text-charcoal-900">{title}</h3>
+            <p class="text-caption text-charcoal-600/60 leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
